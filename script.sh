@@ -60,6 +60,7 @@ BASHRC_CONTENT_PARTS=("" "$BASHRC_JDK_WRAPPED" "$BASHRC_ANDROID_WRAPPED")
 BASHRC_CONTENT=$(join_by "\n\n\n" "${BASHRC_CONTENT_PARTS[@]}")
 
 echo -e "$BASHRC_CONTENT" >> "$HOME/.bashrc"
+source "$HOME/.bashrc"
 
 
 # DOWNLOADS
