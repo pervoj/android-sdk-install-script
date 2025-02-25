@@ -60,7 +60,6 @@ BASHRC_CONTENT_PARTS=("" "$BASHRC_JDK_WRAPPED" "$BASHRC_ANDROID_WRAPPED")
 BASHRC_CONTENT=$(join_by "\n\n\n" "${BASHRC_CONTENT_PARTS[@]}")
 
 echo -e "$BASHRC_CONTENT" >> "$HOME/.bashrc"
-source "$HOME/.bashrc"
 
 
 # DOWNLOADS
@@ -83,14 +82,16 @@ rm $ANDROID_CMD_DOWNLOAD_FILE
 
 # SDK
 
-yes | sdkmanager \
+SDKMANAGER="$ANDROID_CMD_PATH/latest/bin/sdkmanager"
+
+yes | $SDKMANAGER \
   "platform-tools" \
   "emulator" \
   "platforms;android-$ANDROID_PLATFORM_VERSION" \
   "build-tools;$ANDROID_PLATFORM_VERSION.0.0" \
   "system-images;android-$ANDROID_PLATFORM_VERSION;google_apis_playstore;x86_64"
 
-yes | sdkmanager --licenses
+yes | $SDKMANAGER --licenses
 
 
 # END
